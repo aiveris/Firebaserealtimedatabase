@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         txt=findViewById(R.id.textView1);
         gotoTxt=findViewById(R.id.textViewGO);
 
-        dbRef = FirebaseDatabase.getInstance().getReference("Students");
+        dbRef = FirebaseDatabase.getInstance().getReference("Projects");
     }
 
     public void WriteData(View v){
@@ -44,25 +44,21 @@ public class MainActivity extends AppCompatActivity {
 
         String uniqueId = dbRef.push().getKey();
 
-
          //step 1--------------------------
-        //dbRef.child(uniqueId).child("name").setValue(name);//run twice diff names
+        // dbRef.child(uniqueId).child("name").setValue(name);//run twice diff names
 
         //step 2--------------------------
-        //dbRef.child(uniqueId).child("name").setValue(name);
-        //dbRef.child(uniqueId).child("marks").setValue(marks);
-
+        // dbRef.child(uniqueId).child("name").setValue(name);
+        // dbRef.child(uniqueId).child("marks").setValue(marks);
 
         //step 3--------------------------
-        //dbRef.child(uniqueId).child("id").setValue(uniqueId);//option to save to SharedPreferences
-        //dbRef.child(uniqueId).child("name").setValue(name);
-        //dbRef.child(uniqueId).child("marks").setValue(marks);
-
+        dbRef.child(uniqueId).child("id").setValue(uniqueId);//option to save to SharedPreferences
+        dbRef.child(uniqueId).child("name").setValue(name);
+        dbRef.child(uniqueId).child("marks").setValue(marks);
 
         //step 4--------------------------POJO
-        //Student s = new Student(uniqueId,name,marks);
-        //dbRef.child(uniqueId).setValue(s);
-
+        Student s = new Student(uniqueId,name,marks);
+        dbRef.child(uniqueId).setValue(s);
     }
 
     public void UpdateData(View v){
