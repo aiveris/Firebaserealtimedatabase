@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         txt=findViewById(R.id.textView1);
         gotoTxt=findViewById(R.id.textViewGO);
 
-        dbRef = FirebaseDatabase.getInstance().getReference("Projects");
+        dbRef = FirebaseDatabase.getInstance().getReference("Students");
     }
 
     public void WriteData(View v){
@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
         // dbRef.child(uniqueId).child("marks").setValue(marks);
 
         //step 3--------------------------
-        dbRef.child(uniqueId).child("id").setValue(uniqueId);//option to save to SharedPreferences
-        dbRef.child(uniqueId).child("name").setValue(name);
-        dbRef.child(uniqueId).child("marks").setValue(marks);
+        // dbRef.child(uniqueId).child("id").setValue(uniqueId);//option to save to SharedPreferences
+        // dbRef.child(uniqueId).child("name").setValue(name);
+        // dbRef.child(uniqueId).child("marks").setValue(marks);
 
         //step 4--------------------------POJO
         Student s = new Student(uniqueId,name,marks);
@@ -63,15 +63,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void UpdateData(View v){
         DatabaseReference updtRef;
-        updtRef = FirebaseDatabase.getInstance().getReference("Students/-Lho9Q610N798c-JO_a0");
+        updtRef = FirebaseDatabase.getInstance().getReference("Students/-LiOcNUyTodQT5X4eOgi");
 
         //-----------------------1 (simple)
-        //updtRef.child("Marks").setValue(555);
+        // updtRef.child("Marks").setValue(555);
 
 
         //---------------------2 (full POJO)
-        //Student s1 = new Student("-Lho9Q610N798c-JO_a0","AAA",555);
-        //updtRef.setValue(s1);
+        // Student s1 = new Student("-LiOcNUyTodQT5X4eOgi","AAA",555);
+        // updtRef.setValue(s1);
 
 
         //---------------------3 (only few values need update)
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getData(View v){
-    DatabaseReference readRef = FirebaseDatabase.getInstance().getReference("Students/-Lho9Q610N798c-JO_a0");
+    DatabaseReference readRef = FirebaseDatabase.getInstance().getReference("Students/-LiObbDNKqGihizAwl8j");
 
     readRef.addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
@@ -92,19 +92,19 @@ public class MainActivity extends AppCompatActivity {
 
 
             ///-----------------------------simple
-            String name = dataSnapshot.child("name").getValue(String.class);
-            int marks = dataSnapshot.child("marks").getValue(Integer.class);
-            String displayStr = name + "|" + marks;
-            txt.setText(displayStr);
+            // String name = dataSnapshot.child("name").getValue(String.class);
+            // int marks = dataSnapshot.child("marks").getValue(Integer.class);
+            // String displayStr = name + "|" + marks;
+            // txt.setText(displayStr);
 
 
             ///-----------------------------POJO way
-            //Student ss = dataSnapshot.getValue(Student.class);
-            //String name = ss.getName();
-            //int marks = ss.getMarks();
+            Student ss = dataSnapshot.getValue(Student.class);
+            String name = ss.getName();
+            int marks = ss.getMarks();
 
-            //String displayStr = name + "|" + marks;
-            //txt.setText(displayStr);
+            String displayStr = name + "|" + marks;
+            txt.setText(displayStr);
 
         }
 
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Rnd(View v){
-        DatabaseReference readRef = FirebaseDatabase.getInstance().getReference("Students/-Lho9Q610N798c-JO_a0");
+        DatabaseReference readRef = FirebaseDatabase.getInstance().getReference("Students/-LiObbDNKqGihizAwl8j");
 
         readRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -141,8 +141,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // public void goToListeners(View v){
-    //     Intent i = new Intent(this,Main2Activity.class);
-    //     startActivity(i);
-    // }
+    public void goToListeners(View v){
+        Intent i = new Intent(this,Main2Activity.class);
+        startActivity(i);
+    }
 }
